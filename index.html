@@ -403,14 +403,7 @@
                     </button>
                 </div>
             </div>
-            
-            <!-- Hiển thị danh sách các báo cáo đã có -->
-            <div class="mt-4">
-                <h3 class="text-lg font-medium text-gray-700 mb-2">📋 Các báo cáo đã lưu:</h3>
-                <div id="savedReportsList" class="flex flex-wrap gap-2">
-                    <!-- Danh sách các báo cáo sẽ được hiển thị ở đây -->
-                </div>
-            </div>
+                        
         </div>
 
         <!-- ========== KHU VỰC QUẢN LÝ DỮ LIỆU TẬP TRUNG ========== -->
@@ -1148,9 +1141,7 @@
             const monthSelector = document.getElementById('monthSelector');
             
             // Không cần thay đổi vì đã có sẵn options trong HTML
-            
-            // Hiển thị danh sách các báo cáo đã lưu
-            updateSavedReportsList();
+                    
         }
 
 		function changeYearMonth() {
@@ -1241,8 +1232,6 @@
 		// Lưu dữ liệu
 		dataManager.save();
 		
-		// Cập nhật danh sách báo cáo đã lưu
-		updateSavedReportsList();
 		
 		// Render lại giao diện
 		renderKPICards();
@@ -1272,7 +1261,7 @@
                 }
                 
                 // Cập nhật giao diện
-                updateSavedReportsList();
+              
                 renderKPICards();
                 renderCharts();
                 updateReportTitle();
@@ -1281,30 +1270,7 @@
             }
         }
 
-        function updateSavedReportsList() {
-            const savedReportsList = document.getElementById('savedReportsList');
-            const allYearMonths = StorageManager.getAllYearMonths();
-            
-            savedReportsList.innerHTML = '';
-            
-            if (allYearMonths.length === 0) {
-                savedReportsList.innerHTML = '<p class="text-gray-500">Chưa có báo cáo nào được lưu</p>';
-                return;
-            }
-            
-            allYearMonths.forEach(yearMonthKey => {
-                const [year, month] = yearMonthKey.split('-');
-                const reportButton = document.createElement('button');
-                reportButton.className = 'bg-gray-200 hover:bg-gray-300 text-gray-800 py-1 px-3 rounded text-sm';
-                reportButton.textContent = `Tháng ${month}/${year}`;
-                reportButton.onclick = () => {
-                    document.getElementById('yearSelector').value = year;
-                    document.getElementById('monthSelector').value = month;
-                    viewReport(); // Sử dụng hàm viewReport thay vì changeYearMonth trực tiếp
-                };
-                savedReportsList.appendChild(reportButton);
-            });
-        }
+
 
         function updateReportTitle() {
             document.getElementById('reportTitle').textContent = `Báo Cáo Hoạt Động Tháng ${dataManager.currentMonth}/${dataManager.currentYear}`;
@@ -1574,9 +1540,7 @@
             renderKPICards();
             renderCharts();
             
-            // Cập nhật danh sách báo cáo đã lưu
-            updateSavedReportsList();
-            
+                        
             alert('✅ Đã cập nhật và lưu dữ liệu!');
         }
 
